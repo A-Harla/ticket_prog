@@ -56,8 +56,19 @@ func main() {
 
 	rand.Seed(time.Now().UnixNano())
 	// Добавим первую запись в срез
-	AddToTickets(&Alltickets, spaceline[1], rand.Intn(50), ticketType[1], rand.Intn(100))
+	//AddToTickets(&Alltickets, spaceline[1], 50+rand.Intn(12), ticketType[1], 36+rand.Intn(14))
 
+	// Заполнение Alltickets
+	kol := rand.Intn(50)
+	fmt.Printf("В продаже появилось %d билетов:\n", kol)
+
+	for i := 0; i < kol; i++ {
+		tt := 1 + rand.Intn(2)
+		if tt == 1 {
+			AddToTickets(&Alltickets, spaceline[1+rand.Intn(3)], 50+rand.Intn(12), ticketType[tt], 36+rand.Intn(14))
+		} else {
+			AddToTickets(&Alltickets, spaceline[1+rand.Intn(3)], 50+rand.Intn(12), ticketType[2], 2*(36+rand.Intn(14)))
+		}
+	}
 	PrintTickets(Alltickets)
-	
 }
